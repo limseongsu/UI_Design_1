@@ -1,4 +1,27 @@
 class FakeData {
+  List<Result> result;
+
+  FakeData({this.result});
+
+  FakeData.fromJson(Map<String, dynamic> json) {
+    if (json['result'] != null) {
+      result = new List<Result>();
+      json['result'].forEach((v) {
+        result.add(new Result.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.result != null) {
+      data['result'] = this.result.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Result {
   String id;
   int imageId;
   int imageThumbId;
@@ -9,7 +32,7 @@ class FakeData {
   String title;
   String url;
 
-  FakeData(
+  Result(
       {this.id,
         this.imageId,
         this.imageThumbId,
@@ -20,7 +43,7 @@ class FakeData {
         this.title,
         this.url});
 
-  FakeData.fromJson(Map<String, dynamic> json) {
+  Result.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     imageId = json['imageId'];
     imageThumbId = json['imageThumbId'];

@@ -7,24 +7,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:http/http.dart'as http ;
+import 'dart:convert';
+import 'package:ui_design/models/fake_data.dart';
 import 'package:ui_design/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  test('http 통신 테스트', () async {
+    var uri = Uri.parse('https://junho1124.github.io/web_test/posts.json');
+    var response = await http.get(uri);
+    expect(response.statusCode, 200);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    FakeData result = FakeData.fromJson(json.decode(response.body));
+    expect(result.result[0].imageId, 2131165292);
   });
 }
+
