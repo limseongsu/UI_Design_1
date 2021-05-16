@@ -47,6 +47,7 @@ class _MainPageState extends State<MainPage> {
     context.read<ThisProvider>().fetchData().then((jetNewsResult) {
       setState(() {
         context.read<ThisProvider>().publication();
+
         for (int i = 0; i < jetNewsResult.result.length; i++) {
           context
               .read<ThisProvider>()
@@ -70,18 +71,14 @@ class _MainPageState extends State<MainPage> {
         child: DrawerTap(),
       ),
       //main Home body 만드는 곳 시작
-      body: Column(
+      body: ListView(
         children: [
-          ListView(
-            children: [
-              MainTopTile(context.read<ThisProvider>().jetNews),
-              MainTile(context.read<ThisProvider>().jetNews),
-              MainSlider(context.read<ThisProvider>().jetNews),
-              MainTile(context.read<ThisProvider>().jetNews),
-              MainTile(context.read<ThisProvider>().jetNews),
-              MainTile(context.read<ThisProvider>().jetNews),
-            ],
-          ),
+          MainTopTile(context.read<ThisProvider>().jetNews),
+          MainTile(context.read<ThisProvider>().jetNews),
+          MainSlider(context.read<ThisProvider>().jetNews),
+          MainTile(context.read<ThisProvider>().jetNews),
+          MainTile(context.read<ThisProvider>().jetNews),
+          MainTile(context.read<ThisProvider>().jetNews),
         ],
       ),
     );

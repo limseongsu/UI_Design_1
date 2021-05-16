@@ -21,7 +21,7 @@ class _MainTileState extends State<MainTile> {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => DetailPage(widget.news)));
+            MaterialPageRoute(builder: (context) => DetailPages(widget.news)));
       },
       child: SizedBox(
         child: ListTile(
